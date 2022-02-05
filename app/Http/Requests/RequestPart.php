@@ -24,7 +24,7 @@ class RequestPart extends FormRequest
     public function rules()
     {
         return [
-            //
+            'supplier_id'=>'required|exists:suppliers,id',
         ];
     }
 }

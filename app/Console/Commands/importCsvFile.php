@@ -19,7 +19,7 @@ class importCsvFile extends Command
      *
      * @var string
      */
-    protected $description = 'Import Csv File Into Database';
+    protected $description = 'Import Csv File Into Database example: php artisan import:csv C:\Users\Desktop\example.csv';
 
     /**
      * Create a new command instance.
@@ -38,11 +38,11 @@ class importCsvFile extends Command
      */
     public function handle()
     {
-        $userId = $this->argument('file:path');
+        $importCsv = $this->argument('file:path');
 
 
-        Excel::import( new CsvImport(),$userId);
+        Excel::import( new CsvImport(),$importCsv);
 
-        echo 'finish';
+        echo 'Successfully imported';
     }
 }

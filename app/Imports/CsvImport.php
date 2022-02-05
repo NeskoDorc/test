@@ -13,12 +13,7 @@ class CsvImport implements ToCollection,WithHeadingRow
 {
 
 
-    private $proba;
-
     public function __constract(){
-
-
-        $this->proba = Supplier::select('id','supplier_name')->get;
 
     }
 
@@ -26,6 +21,7 @@ class CsvImport implements ToCollection,WithHeadingRow
     {
         $b = false;
         foreach ($rows as $row) {
+
             if(!$b) {       //edited for accuracy
                 $b = true;
                 continue;
@@ -39,7 +35,7 @@ class CsvImport implements ToCollection,WithHeadingRow
 
             }else {
                 $prob = Supplier::where('supplier_name',$row['supplier_name'] )->first();
-//                dd($row);
+            //                dd($row);
                 Part::create([
                     'supplier_id' => $prob->id,
                     'days_valid' => $row['days_valid'],

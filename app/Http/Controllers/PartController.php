@@ -20,6 +20,12 @@ class PartController extends Controller
 
 
 
+    /**
+     * Display all parts that belong to supplier.
+     *
+     * @param  \App\Models\Supplier  $supplier
+     * @return \Illuminate\Http\Response
+     */
 
     public function getBySupplier(RequestPart $request, Supplier $supplier)
     {
