@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function(){
 
 Route::apiResource('suppliers', SupplierController::class);
-
+    Route::apiResource('parts', PartController::class);
+//    Route::get('/suppliers/{id}/parts', SupplierController::class)->only('getParts');
+    Route::get('suppliers/{id}/parts', [SupplierController::class, 'getParts']);
+    Route::get('part/by-suppliers/{supplier}', [PartController::class, 'getBySupplier']);
 });
-
 

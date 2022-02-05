@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Resources\V1\PartResource;
 use App\Models\Part;
 use App\Http\Requests\RequestPart;
+use App\Models\Supplier;
 
 class PartController extends Controller
 {
@@ -13,7 +15,14 @@ class PartController extends Controller
      */
     public function index()
     {
-        //
+        return PartResource::collection(Part::paginate(30));
+    }
+
+    public function getBySupplier(RequestPart $request, Supplier $supplier)
+    {
+        return PartResource::collection(Part::where([
+            'supplier_id' => $supplier->id
+        ])->paginate());
     }
 
     /**

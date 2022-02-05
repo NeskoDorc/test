@@ -15,8 +15,8 @@ class CreatePartsTable extends Migration
     {
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('supplier_id')->nullable();
-            $table->foreign('supplier_id')->references('id')->on('suppliers');
+
+            $table->foreignIdFor(\App\Models\Supplier::class)->nullable();
             $table->string('part_desc');
             $table->string('category');
             $table->string('part_number');

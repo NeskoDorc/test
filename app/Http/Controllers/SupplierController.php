@@ -52,6 +52,7 @@ class SupplierController extends Controller
         return new SupplierResource($supplier);
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -75,6 +76,7 @@ class SupplierController extends Controller
        $supplier->update($request->all);
        return new SupplierResource($supplier);
     }
+
 
     /**
      * Remove the specified resource from storage.
