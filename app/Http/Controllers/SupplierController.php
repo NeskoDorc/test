@@ -54,17 +54,6 @@ class SupplierController extends Controller
 
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Supplier  $supplier
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Supplier $supplier)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -73,7 +62,9 @@ class SupplierController extends Controller
      */
     public function update(RequestSupplier $request, Supplier $supplier)
     {
-       $supplier->update($request->all);
+
+
+       $supplier->update($request->all());
        return new SupplierResource($supplier);
     }
 
@@ -86,6 +77,7 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        //
+        $supplier->delete();
+        return response('',204);
     }
 }

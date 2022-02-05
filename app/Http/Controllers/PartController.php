@@ -18,6 +18,9 @@ class PartController extends Controller
         return PartResource::collection(Part::paginate(30));
     }
 
+
+
+
     public function getBySupplier(RequestPart $request, Supplier $supplier)
     {
         return PartResource::collection(Part::where([
@@ -25,48 +28,42 @@ class PartController extends Controller
         ])->paginate());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(RequestPart $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Part  $part
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Part $part)
     {
-        //
+        return new PartResource($part);
     }
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Part  $part
      * @return \Illuminate\Http\Response
      */
-    public function update(RequestPart$request, $id)
+    public function update(RequestPart $request, Part $part)
     {
-        //
+        $part->update($request->all());
+        return new PartResource($part);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Part  $part
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Part $part)
     {
-        //
+        $part->delete();
+        return response('',204);
     }
 }
