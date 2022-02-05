@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\V1\SupplierResource;
 use App\Models\Supplier;
 use App\Http\Requests\RequestSupplier;
 
@@ -15,7 +16,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+       return SupplierResource::collection(Supplier::paginate());
     }
 
     /**
@@ -37,7 +38,7 @@ class SupplierController extends Controller
     public function store(RequestSupplier $request)
     {
        $suplier = Supplier::create($request->all());
-       return $suplier;
+       return new SupplierResource($suplier);
     }
 
     /**
@@ -48,7 +49,7 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
-        //
+        return new SupplierResource($supplier);
     }
 
     /**
@@ -71,7 +72,8 @@ class SupplierController extends Controller
      */
     public function update(RequestSupplier $request, Supplier $supplier)
     {
-        //
+       $supplier->update($request->all);
+       return new SupplierResource($supplier);
     }
 
     /**
