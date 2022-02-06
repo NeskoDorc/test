@@ -24,8 +24,8 @@ Route::prefix('v1')->group(function(){
 
 Route::apiResource('suppliers', SupplierController::class);
     Route::apiResource('parts', PartController::class);
-//    Route::get('/suppliers/{id}/parts', SupplierController::class)->only('getParts');
     Route::get('suppliers/{id}/parts', [SupplierController::class, 'getParts']);
     Route::get('part/by-suppliers/{supplier}', [PartController::class, 'getBySupplier']);
+
 });
 

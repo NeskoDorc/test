@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Exports\CsvExport;
 use App\Http\Resources\V1\PartResource;
 use App\Models\Part;
 use App\Http\Requests\RequestPart;
 use App\Models\Supplier;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class PartController extends Controller
 {
@@ -32,9 +35,32 @@ class PartController extends Controller
         return PartResource::collection(Part::where([
             'supplier_id' => $supplier->id
         ])->paginate());
+
+
     }
 
+    public function exportBySupplier(Supplier $supplier)
+    {
 
+
+
+                $idSupplier = PartResource::collection(Part::where([
+                    'supplier_id' => $supplier->id
+                ])->get());
+
+                $sup = Supplier::where([
+                    'id'=>$supplier->id
+                ])->get('supplier_name')->toArray();
+
+
+                $file_name = $sup[0]['supplier_name'];
+
+                $file_name = str_replace(' ', '_', $file_name);
+
+                return Excel::download(new CsvExport($idSupplier), $file_name.'_'.date("Y_m_d_H_i").'.csv');
+
+
+    }
 
     /**
      * Display the specified resource.

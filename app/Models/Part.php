@@ -12,7 +12,9 @@ class Part extends Model
     use HasFactory;
     protected $guarded=[];
 
-    public function parts(){
+
+
+    public function sup(){
         return $this->belongsTo(Supplier::class);
     }
 
